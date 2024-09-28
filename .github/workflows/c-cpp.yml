@@ -13,7 +13,9 @@ jobs:
     steps:
       - name: Checkout Project
         uses: actions/checkout@v4.1.7
-      - name: Build Project
+      - name: Generate CMake build files
         uses: threeal/cmake-action@v2.0.0
+      - name: Run make
+        run: make
       - name: Run Project
         run: ./build/terminal-chess
