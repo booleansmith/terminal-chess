@@ -4,6 +4,5 @@ project(terminalChess)
 
 add_executable(terminalChess main.cpp)
 
-add_subdirectory(../board ${CMAKE_BINARY_DIR}/library_build)
-
-target_link_libraries(terminalChess boardlibrary)
+# Link the board library to the terminalChess executable
+target_link_libraries(terminalChess PUBLIC boardlibrary)
