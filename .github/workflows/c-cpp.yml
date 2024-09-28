@@ -18,6 +18,6 @@ jobs:
       - name: Print out the current directory
         run: pwd
       - name: Print contents of directory
-        run: ls -la
+        run: ls -la build
       - name: Run Project
-        run: ./bin/terminalChess
+        run: ./build/bin/terminalChess
