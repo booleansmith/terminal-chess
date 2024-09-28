@@ -31,6 +31,7 @@
 *.out
 *.app
 /build
+/bin
 
 # CMake build files
 CMakeLists.txt.user
