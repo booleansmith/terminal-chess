@@ -16,4 +16,4 @@ jobs:
       - name: Generate CMake build files and run make
         uses: threeal/cmake-action@v2.0.0
       - name: Run Project
-        run: ./bin/terminal-chess
+        run: ./bin/terminalChess
