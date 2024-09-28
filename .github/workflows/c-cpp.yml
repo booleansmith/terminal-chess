@@ -15,5 +15,9 @@ jobs:
         uses: actions/checkout@v4.1.7
       - name: Generate CMake build files and run make
         uses: threeal/cmake-action@v2.0.0
+      - name: Print out the current directory
+        run: pwd
+      - name: Print contents of directory
+        run: ls -la
       - name: Run Project
         run: ./bin/terminalChess
