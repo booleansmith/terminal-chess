@@ -1,11 +1,16 @@
 cmake_minimum_required(VERSION 3.10)
 
-add_library(board_library STATIC src/board.cpp)
+# Set the project name
+project(boardlibrary)
 
-# add_subdirectory(../piece ${CMAKE_BINARY_DIR}/piece_library)
-# target_link_libraries(boardLibrary PRIVATE pieceLibrary)
+# Set the output directory for binaries
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 
-target_include_directories(board_library PUBLIC
+# Add the source files
+add_library(boardlibrary STATIC src/board.cpp)
+
+# Include the header files as public for other libraries
+target_include_directories(boardlibrary PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include
 )
 

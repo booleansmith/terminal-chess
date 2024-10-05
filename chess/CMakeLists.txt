@@ -7,8 +7,12 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 add_executable(terminalChess main.cpp)
 
-add_subdirectory(../board ${CMAKE_BINARY_DIR}/board_library)
-add_subdirectory(../piece ${CMAKE_BINARY_DIR}/piece_library)
 
-target_link_libraries(terminalChess board_library)
+# Set the output directory for the terminalChess binary
+set_target_properties(terminalChess PROPERTIES
+    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+)
+
+# Link the board library to the terminalChess executable
+target_link_libraries(terminalChess PUBLIC boardlibrary)
 target_link_libraries(terminalChess piece_library)
