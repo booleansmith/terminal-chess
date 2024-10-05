@@ -11,5 +11,5 @@ set_target_properties(terminalChess PROPERTIES
 )
 
 # Link the board library to the terminalChess executable
-target_link_libraries(terminalChess PUBLIC board_library)
-target_link_libraries(terminalChess PUBLIC piece_library)
+target_link_libraries(terminalChess PRIVATE board_library)
+target_link_libraries(terminalChess PRIVATE piece_library)
