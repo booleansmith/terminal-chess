@@ -12,7 +12,7 @@ class Board{
     private:
         int nRows = 8;
         int nCols = 8;
-        std::vector<std::unique_ptr<Piece>> pieceArray;
+        std::vector<std::unique_ptr<Piece> > pieceArray;
     public:
         Board();
         void printBoard();

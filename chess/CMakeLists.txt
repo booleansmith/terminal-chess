@@ -2,9 +2,6 @@ cmake_minimum_required(VERSION 3.10)
 
 project(terminalChess)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED True)
-
 add_executable(terminalChess main.cpp)
 
 
@@ -14,5 +11,5 @@ set_target_properties(terminalChess PROPERTIES
 )
 
 # Link the board library to the terminalChess executable
-target_link_libraries(terminalChess PUBLIC boardlibrary)
-target_link_libraries(terminalChess piece_library)
+target_link_libraries(terminalChess PUBLIC board_library)
+target_link_libraries(terminalChess PUBLIC piece_library)
