@@ -4,21 +4,26 @@
 #include <iostream>
 #include <memory>
 #include <vector>
+#include <cstring>
+#include <stdexcept>
 
 #include "piece.hpp"
 
-
 class Board{
     private:
-        int nRows = 8;
-        int nCols = 8;
+        char startCol = 'a';
+        char endCol = 'h';
+        int startRow = 1;
+        int endRow = 8;
         std::vector<std::unique_ptr<Piece> > pieceArray;
+        int convertCoordinatePair(char * cp);
+
     public:
         Board();
-        void printBoard();
+        void printBoard(bool isWhitesTurn);
         void printRowDivder();
         void printColDivider();
-
+        void move(char * mv, int length, bool isWhitesturn);
 };
 
 #endif

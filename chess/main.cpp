@@ -5,5 +5,5 @@
 int main(){
     std::cout << "Welcome to main\n";
     Board myBoard;
-    myBoard.printBoard();
+    myBoard.printBoard(0);
 }

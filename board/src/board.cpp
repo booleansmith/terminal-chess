@@ -30,29 +30,30 @@ Board::Board(){
         pieceArray[i] = std::make_unique<Pawn>(1);
     }
 }
-void Board::printBoard(){
-    std::cout << "Printing the board here\n";
+void Board::printBoard(bool isWhitesTurn){
     // Print first line
-    for(char c = 'a'; c <= 'h'; c++){
+    for(char c = startCol; c <= endCol; c++){
         std::cout << " |  " << c << " ";
     }
     std::cout << " |\n";
 
     // print tiles
-    for(int row = 0; row < nRows; row++){
+    for(int row = endRow; row > 0; row--){
         printRowDivder();
         printColDivider();
 
         // Print pieces
-        std::cout << 8-row;
-        for (int col = 0; col < nCols; col++){
+        std::cout << row;
+        for (char col = startCol; col <= endCol; col++){
             std::cout << "|  ";
-            if (pieceArray[nRows*row + col] == nullptr){
+            char pair[] = {col,static_cast<char>(row+(int)'0')};
+            int idx = convertCoordinatePair(pair);
+            if (pieceArray[idx] == nullptr){
                 std::cout << " ";
             } else {
-                pieceArray[nRows*row + col]->print();
+                pieceArray[idx]->print();
             }
-            
+            // std::cout << idx;
             std::cout << "  ";
         }
         std::cout << "|\n";
@@ -71,9 +72,23 @@ void Board::printRowDivder(){
 }
 void Board::printColDivider(){
     std::cout << " |";
-    for (int i = 0; i < nCols; i++){
+    for (char i = startCol; i <= endCol; i++){
         std::cout << "     |";
     }
     std::cout << std::endl;
+}
+
+int Board::convertCoordinatePair(char * cp){
+    // if(strlen(cp) != 2){ // TODO: Figure out how many elements should be in this array
+    //     std::cout << strlen(cp) << std::endl;
+    //     throw std::runtime_error("Coordinate pair must be 2, because its a pair...");
+    // }
+    int col = (int)cp[0]-startCol;
+    int row = cp[1]-'0';
+    return (row-1)*8+col;
+}
+
+void Board::move(char * mv, int length, bool isWhitesturn){
+    return;
 }
 
