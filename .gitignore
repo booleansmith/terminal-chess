@@ -30,8 +30,8 @@
 *.exe
 *.out
 *.app
-/build
-/bin
+build/
+bin/
 
 # CMake build files
 CMakeLists.txt.user
