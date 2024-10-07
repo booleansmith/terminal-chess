@@ -38,7 +38,11 @@ void Board::printBoard(bool isWhitesTurn){
     std::cout << " |\n";
 
     // print tiles
-    for(int row = endRow; row > 0; row--){
+    int start = isWhitesTurn ? endRow : startRow; // Set starting value
+    int end = isWhitesTurn ? startRow-1 : endRow+1;  // Set ending valu(exclusive)
+    int step = isWhitesTurn ? -1 : 1;  // Set step based on direction
+
+    for(int row = start; row != end; row+=step){
         printRowDivder();
         printColDivider();
 
