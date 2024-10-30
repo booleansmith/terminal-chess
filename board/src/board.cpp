@@ -31,65 +31,69 @@ Board::Board(){
     }
 }
 void Board::printBoard(bool isWhitesTurn){
-    // Print first line
-    for(char c = startCol; c <= endCol; c++){
-        std::cout << " |  " << c << " ";
-    }
-    std::cout << " |\n";
-
     // print tiles
     int start = isWhitesTurn ? endRow : startRow; // Set starting value
     int end = isWhitesTurn ? startRow-1 : endRow+1;  // Set ending valu(exclusive)
     int step = isWhitesTurn ? -1 : 1;  // Set step based on direction
+    
+    char charArray[] = {' ', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
+    
+    // Print the header line
+    printLine(charArray,false,false);
 
-    for(int row = start; row != end; row+=step){
-        printRowDivder();
-        printColDivider();
-
-        // Print pieces
-        std::cout << row;
-        for (char col = startCol; col <= endCol; col++){
-            std::cout << "|  ";
-            char pair[] = {col,static_cast<char>(row+(int)'0')};
-            int idx = convertCoordinatePair(pair);
+    for(int row = start; row != end; row+=step){ 
+        charArray[0] = '0' + row;    
+        for (int col = startCol; col <= endCol; col++){
+            int idx = convertCoordinatePair(row,col);
             if (pieceArray[idx] == nullptr){
-                std::cout << " ";
+                charArray[col] = ' ';
             } else {
-                pieceArray[idx]->print();
+                charArray[col] = pieceArray[idx]->getChar();
             }
-            // std::cout << idx;
-            std::cout << "  ";
         }
-        std::cout << "|\n";
-
-        printColDivider();
+        printLine(charArray,true,row%2);
     }
-    printRowDivder();
+}
+
+void Board::printLine(char* charArray, bool print3, bool isOddRow){
+    int offset = 40;
+    int colorCode;
+    if(print3){
+        // Print the first line
+        colorCode = offset + isOddRow * 7;
+        std::cout << "\033[" << colorCode << "m   ";
+        for (int col = 1; col < 9; col++){
+            colorCode = offset + (col + isOddRow) % 2 * 7;
+            std::cout << "\033[" << colorCode << "m       ";
+        }
+        std::cout << "\033[0m\n";
+    }
+
+    // Print the middle line
+    colorCode = offset + isOddRow * 7;
+    std::cout << "\033[" << colorCode << "m " << charArray[0] << " ";
+    for (int col = 1; col < 9; col++){
+        colorCode = offset + (col + isOddRow) % 2 * 7;
+        std::cout << "\033[" << colorCode << "m   " << charArray[col] << "   ";
+    }   
+    std::cout << "\033[0m\n";
+
+    if(print3){
+        // print the last line
+        colorCode = offset + isOddRow * 7;
+        std::cout << "\033[" << colorCode << "m   ";
+        for (int col = 1; col < 9; col++){
+            colorCode = offset + (col + isOddRow) % 2 * 7;
+            std::cout << "\033[" << colorCode << "m       ";
+        }        
+        std::cout << "\033[0m\n";
+    }
 }
 
 
-void Board::printRowDivder(){
-    for (int i = 0; i < 50; i++){ // todo: use variable
-        std::cout << "-";
-    }
-    std::cout << std::endl;
-}
-void Board::printColDivider(){
-    std::cout << " |";
-    for (char i = startCol; i <= endCol; i++){
-        std::cout << "     |";
-    }
-    std::cout << std::endl;
-}
 
-int Board::convertCoordinatePair(char * cp){
-    // if(strlen(cp) != 2){ // TODO: Figure out how many elements should be in this array
-    //     std::cout << strlen(cp) << std::endl;
-    //     throw std::runtime_error("Coordinate pair must be 2, because its a pair...");
-    // }
-    int col = (int)cp[0]-startCol;
-    int row = cp[1]-'0';
-    return (row-1)*8+col;
+int Board::convertCoordinatePair(int row, int col){
+    return (row-1)*8+col-1;
 }
 
 void Board::move(char * mv, int length, bool isWhitesturn){

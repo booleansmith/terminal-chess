@@ -14,6 +14,7 @@ class Piece{
     public:
         Piece(){};
         Piece(bool isBlackTeam, char printChar):isBlackTeam(isBlackTeam),printChar(printChar){};
+        char getChar(){return printChar+ isBlackTeam*32;}
         void print();    
 };
 
