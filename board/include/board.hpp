@@ -11,18 +11,17 @@
 
 class Board{
     private:
-        char startCol = 'a';
-        char endCol = 'h';
+        char startCol = 1;
+        char endCol = 8;
         int startRow = 1;
         int endRow = 8;
         std::vector<std::unique_ptr<Piece> > pieceArray;
-        int convertCoordinatePair(char * cp);
+        int convertCoordinatePair(int row, int col);
+        void printLine(char* characterArray, bool print3, bool isOddRow);
 
     public:
         Board();
         void printBoard(bool isWhitesTurn);
-        void printRowDivder();
-        void printColDivider();
         void move(char * mv, int length, bool isWhitesturn);
 };
 
